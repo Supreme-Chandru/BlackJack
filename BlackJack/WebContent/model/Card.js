@@ -10,8 +10,8 @@ define(['underscore','backbone'], function (_, BackBone) {
 		
 		//initializing card with its Face Value, Face Name, 
 		initialize: function(){
-			this.faceValue=this.getFaceValue();
 			this.faceName=this.getFaceName();
+			this.faceValue=this.getFaceValue();
 			this.suit=this.getSuit();
 		},
 		
@@ -54,8 +54,6 @@ define(['underscore','backbone'], function (_, BackBone) {
 			return suitDictionary[this.get("suit").toString()];
 			
 		}
-		
-		
 		
 		
 	});

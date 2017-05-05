@@ -74,16 +74,26 @@ $(document).ready(function(){
 
 	//alert("Overall Idea");
 	
-	require(['backbone','app','model/CardGame','collection/Deck','collection/Hand'], function (Backbone, AppView, CardGame,Deck,Hand) {
+	require(['backbone','app','model/BlackJackCardGame','collection/BlackJackDeck','collection/BlackJackHand'], function (Backbone, AppView, BlackJackCardGame, Deck,BlackJackHand) {
 		
 		// Initialize the application view
-		var cardGame = new CardGame();
-		var deck = cardGame.getDeck();
-		document.write(JSON.stringify(deck.toJSON()));
-		var hand = new Hand(_.sample(deck.collect(),3));
-		var score = hand.getScore();
-		document.write(score);
+		var gameParameters={
+				"numberOfSets" : 1
+		};
 		
+		var blackJackCardGame = new BlackJackCardGame(gameParameters);
+		var deck = blackJackCardGame.getDeck();
+		//document.write(JSON.stringify(deck.toJSON()));
+		var blackJackHand = new BlackJackHand(_.sample(deck.collect(),3));
+		//document.write(JSON.stringify(blackJackHand.toJSON()));
+		_.each(blackJackHand.models, function(blackJackCard,s){
+			document.write(blackJackCard.getFaceName());
+			document.write(blackJackCard.getFaceValue());
+			document.write("\n");
+		});
+		var score = blackJackHand.getScore();
+		document.write(score);
+		document.write("\n");
 		
 	});
 });

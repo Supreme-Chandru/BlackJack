@@ -2,14 +2,25 @@ define(['underscore','backbone','collection/Deck'], function (_, BackBone,Deck) 
 	
 
 	var CardGame = BackBone.Model.extend({
-		initialize:function(){
+		
+		defaults:{
+			"numberOfSets":1
+		},
+		
+		initialize:function(attributes){
 			//create deck
-			this.deck = new Deck([],{"numberOfSets":2});
-			this.deck.createCards();
-			
-			
+			this.deckParameter={
+					"numberOfSets":this.get("numberOfSets")
+					};
+			this.deck = this.createDeck();
 			
 		},
+		
+		createDeck:function(numberOfSets){
+			
+			 return new Deck(null,this.deckParameter);
+		},
+		
 		getDeck:function(){
 			return this.deck;
 		}
