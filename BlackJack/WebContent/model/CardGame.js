@@ -3,9 +3,11 @@ define(['underscore','backbone','collection/Deck'], function (_, BackBone,Deck) 
 
 	var CardGame = BackBone.Model.extend({
 		initialize:function(){
-			var deck = new Deck([],{"numberOfSets":2});
-			deck.createCards();
-			this.deck = deck;
+			//create deck
+			this.deck = new Deck([],{"numberOfSets":2});
+			this.deck.createCards();
+			
+			
 			
 		},
 		getDeck:function(){

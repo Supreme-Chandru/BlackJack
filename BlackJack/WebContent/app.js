@@ -28,8 +28,8 @@ require.config({
 	},
 	paths: {
 		jquery: 'lib/jquery-3.2.1.min',
-		underscore: 'lib/underscore-min',
-		backbone: 'lib/backbone-min',
+		underscore: 'lib/underscore',
+		backbone: 'lib/backbone',
 		//backboneLocalstorage: '../node_modules/backbone.localstorage/backbone.localStorage',
 		//text: '../node_modules/requirejs-text/text'
 	}
@@ -74,11 +74,16 @@ $(document).ready(function(){
 
 	//alert("Overall Idea");
 	
-	require(['backbone','app','model/CardGame','collection/Deck'], function (Backbone, AppView, CardGame,Deck) {
+	require(['backbone','app','model/CardGame','collection/Deck','collection/Hand'], function (Backbone, AppView, CardGame,Deck,Hand) {
 		
 		// Initialize the application view
 		var cardGame = new CardGame();
 		var deck = cardGame.getDeck();
 		document.write(JSON.stringify(deck.toJSON()));
+		var hand = new Hand(_.sample(deck.collect(),3));
+		var score = hand.getScore();
+		document.write(score);
+		
+		
 	});
 });
