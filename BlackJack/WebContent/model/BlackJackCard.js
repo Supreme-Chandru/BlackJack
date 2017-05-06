@@ -12,6 +12,7 @@ define(['underscore','backbone','model/Card'], function (_, BackBone,Card) {
 			if(value > 10 && value < 14){
 				return 10;
 			}
+			this.set("faceValue",value);
 			return value;
 		}
 	});
