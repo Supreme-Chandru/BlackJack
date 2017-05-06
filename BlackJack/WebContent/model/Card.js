@@ -1,5 +1,4 @@
 define(['underscore','backbone'], function (_, BackBone) {
-	
 
 	var Card = BackBone.Model.extend({
 		
@@ -9,10 +8,12 @@ define(['underscore','backbone'], function (_, BackBone) {
 		},
 		
 		//initializing card with its Face Value, Face Name, 
-		initialize: function(){
-			this.faceName=this.getFaceName();
-			this.faceValue=this.getFaceValue();
-			this.suit=this.getSuit();
+		initialize: function(attributes){
+			
+				this.set("faceName",this.getFaceName());
+				this.set("faceValue",this.getFaceValue());
+				this.set("suit",this.getSuit());
+			
 		},
 		
 		//By Default facevalue will be from  1 to 13 
@@ -38,6 +39,7 @@ define(['underscore','backbone'], function (_, BackBone) {
 					"12":"Queen",
 					"13":"King"
 				}
+			
 			return faceDictionary[this.get("faceValue").toString()];
 			
 		},
@@ -54,7 +56,6 @@ define(['underscore','backbone'], function (_, BackBone) {
 			return suitDictionary[this.get("suit").toString()];
 			
 		}
-		
 		
 	});
 
