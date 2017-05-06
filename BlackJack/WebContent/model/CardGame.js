@@ -12,7 +12,7 @@ define(['underscore','backbone','collection/Deck'], function (_, BackBone,Deck) 
 			this.deckParameter={
 					"numberOfSets":this.get("numberOfSets")
 					};
-			this.deck = this.createDeck();
+			this.set("deck",this.createDeck())  ;
 			
 		},
 		
