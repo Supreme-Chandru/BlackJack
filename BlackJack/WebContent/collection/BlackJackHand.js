@@ -1,9 +1,9 @@
 define(['underscore','backbone','model/BlackJackCard','collection/Hand'], function (_, BackBone,BlackJackCard,Hand) {
 	
-
 	var BlackJackHand = Hand.extend({
 		defaults:{
-			numberOfAces:0
+			numberOfAces:0,
+			score:new Score()
 		},
 		model:BlackJackCard,
 		getScore:function(){
@@ -23,15 +23,15 @@ define(['underscore','backbone','model/BlackJackCard','collection/Hand'], functi
 			if(numberOfAces > 0 && hardScore <=11 ){
 				//10 is added because 1 is already added in hardScore
 				var softScore = hardScore+10;
-				return softScore;
+				
+				var score = this.get("score");
+				score.set("type","Soft");
+				score.set("value",softScore);
+				return score;
 				
 			}
 			
-			
-			return hardScore;	
-			
-			
-			
+			return this.get("score").set("value",hardScore);	
 			 
 		}
 	});
