@@ -20,8 +20,13 @@ define(['underscore','backbone','model/Card'], function (_, BackBone,Card) {
 					this.push(card);
 				},this);
 			},this);
-			
-		}
+			console.log("Deck Ready");
+		},
+		 
+		 shuffle:function(){
+			 this.models = _.shuffle(this.models);
+			 console.log("Deck Shuffled");
+		 }
 		
 	});
 
