@@ -1,16 +1,15 @@
-define(['underscore','backbone','model/BlackJackCard','collection/Hand'], function (_, BackBone,BlackJackCard,Hand) {
+define(['underscore','backbone','model/BlackJackCard','collection/Hand','model/Score'], function (_, BackBone, BlackJackCard, Hand, Score) {
 	
 	var BlackJackHand = Hand.extend({
-		defaults:{
-			numberOfAces:0,
-			score:new Score()
+		
+		initialize:function(models,attributes){
+			this.score = new Score({"type":"Hard", "value":0});
 		},
 		model:BlackJackCard,
 		getScore:function(){
 			
-			
 			//calculating hardScore, where Ace is treated as 1
-			var hardScore = this.constructor.__super__.getScore.apply(this,{});
+			var hardScore = this.constructor.__super__.constructor.getScore.apply(this,{});
 			var aces = _.filter(this.models, function(blackJackCard){ 
 				 	return blackJackCard.getFaceName()=="Ace"; 
 				 });
@@ -24,16 +23,17 @@ define(['underscore','backbone','model/BlackJackCard','collection/Hand'], functi
 				//10 is added because 1 is already added in hardScore
 				var softScore = hardScore+10;
 				
-				var score = this.get("score");
+				var score = this.score;
 				score.set("type","Soft");
 				score.set("value",softScore);
 				return score;
 				
 			}
 			
-			return this.get("score").set("value",hardScore);	
+			return this.score.set("value",hardScore);	
 			 
 		}
+		
 	});
 
 	return BlackJackHand;
