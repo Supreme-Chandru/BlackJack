@@ -12,3 +12,8 @@ This is a Static Project, it does not need any external building. Open the index
 - Hit Button : Click on Hit button to request Dealer to draw you a card
 - Stand Button : Click on Stand Button to stop with existing Total
 
+# Libraries
+- BackBone.js : To achieve Reusable code, Well Structured & Organized Code, Readability, OOP style coding
+- Underscore.js : For Helper Utilities for easy handling of Model & Collection
+- Require.js : For Modularity, Dependency Tracking and File Load 
+- JQuery.js : DOM Traversals
