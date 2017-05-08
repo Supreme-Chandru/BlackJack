@@ -56,19 +56,27 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 				this.play();
 				var dealerScoreValue = this.get("hand").getScore().get("value");
 				
+				//log the scores of both dealer and player
+				console.log(this.get("name")+" : SCORE --> "+ dealerScoreValue);
+				console.log(player.get("name")+" : SCORE --> "+ playerScoreValue);
+				
+				
 				//Player win Scenario
 				if(dealerScoreValue < playerScoreValue){
 					player.won();
 				}
+				
 				//Player lost Scenario
 				else if(dealerScoreValue > playerScoreValue){
 					player.lost();
 				}
+				
 				//Player & Dealer lost Scenario
 				else if(dealerScoreValue === playerScoreValue){
-					player.lost();
+					player.tie();
 				}
 			}
+			this.get("game").endRound();
 			
 		},
 		clearTable:function(){
@@ -79,12 +87,20 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 			var deck = game.get("deck");
 			var dealerHand = this.get("hand");
 			
-			deck.push(playerHand.models);
-			deck.push(dealerHand.models);
+			this.addCardBacktoDeck(deck, playerHand);
+			this.addCardBacktoDeck(deck, dealerHand);
 			
-			playerHand.reset(null);
-			dealerHand.reset(null);
-			
+		},
+		
+		addCardBacktoDeck:function(deck, hand){
+			while(hand.length!=0) {
+				var card = hand.shift();
+				deck.push(card); 
+			}
+		},
+		
+		bust:function(){
+			this.get("game").get("player").won();
 		}
 	
 	});

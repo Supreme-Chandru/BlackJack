@@ -1,4 +1,4 @@
-define(['underscore','backbone','model/ScoreBoard','collection/BlackJackHand','model/Score'], function (_, BackBone, ScoreBoard, BlackJackHand, Score) {
+define(['underscore','backbone','model/ScoreBoard','collection/BlackJackHand','model/Score','view/PlayerView.js'], function (_, BackBone, ScoreBoard, BlackJackHand, Score, PlayerView) {
 	
 
 	var Player = BackBone.Model.extend({
@@ -6,11 +6,18 @@ define(['underscore','backbone','model/ScoreBoard','collection/BlackJackHand','m
 		initialize:function(){
 			
 			this.set("scoreBoard",new ScoreBoard());
-			var blackJackHand = new BlackJackHand(null,{});
+			var blackJackHand = new BlackJackHand(null,{"parent":this});
 			
 			this.set("hand",blackJackHand);
 			
+			this.gameView = this.get("game").get("view");
+			
+			//bind player the View
+			//var playerView = new PlayerView({model : this});
+			
+			
 		},
+		
 		hit:function(){
 			console.log(this.get("name")+" : ACTION --> HIT");
 			var dealer = this.get("dealer");
@@ -23,22 +30,33 @@ define(['underscore','backbone','model/ScoreBoard','collection/BlackJackHand','m
 			dealer.endPlayerRound(this);
 		},
 		bust:function(){
+			this.gameView.notifyPlayer("Busted");
 			console.log(this.get("name")+" : STATUS --> BUSTED");
 			// dealer has busted him
-			lost();
+			var scoreBoard = this.get("scoreBoard");
+			scoreBoard.incrementTotalPlayed();
 			
 		},
 		
 		won:function(){
+			this.gameView.notifyPlayer("You Won");
 			console.log(this.get("name")+" : STATUS --> WON");
-			var scoreBoard = this.set("scoreBoard");
+			var scoreBoard = this.get("scoreBoard");
 			scoreBoard.incrementTotalWon();
 			scoreBoard.incrementTotalPlayed();
 		},
 		
 		lost:function(){
+			this.gameView.notifyPlayer("You Lost");
 			console.log(this.get("name")+" : STATUS --> LOST");
-			var scoreBoard = this.set("scoreBoard");
+			var scoreBoard = this.get("scoreBoard");
+			scoreBoard.incrementTotalPlayed();
+		},
+		
+		tie:function(){
+			this.gameView.notifyPlayer("Push");
+			console.log(this.get("name")+" : STATUS --> TIE");
+			var scoreBoard = this.get("scoreBoard");
 			scoreBoard.incrementTotalPlayed();
 		}
 	
