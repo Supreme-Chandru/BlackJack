@@ -2,7 +2,7 @@ define(['underscore','backbone','model/Card','view/PlayerView'], function (_, Ba
 	
 	var DealerView = PlayerView.extend({
 		el : "#dealerview",
-		template:"<div class='hand'></div>",
+		template:"<div class='score'></div><div class='hand'></div>",
 		events : {
 			
 		},

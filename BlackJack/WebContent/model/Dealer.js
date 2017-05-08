@@ -37,7 +37,7 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 			
 			if(scoreValue>21){
 				player.bust();
-				this.get("game").endRound();
+				//this.get("game").endRound();
 			}
 			
 		},
@@ -48,7 +48,7 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 			//Player lose scenario
 			if(playerScoreValue>21){
 				player.bust();
-				this.get("game").endRound();
+				//this.get("game").endRound();
 			}
 			else
 			{
@@ -80,7 +80,7 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 					player.tie();
 				}
 			}
-			this.get("game").endRound();
+			//this.get("game").endRound();
 			
 		},
 		clearTable:function(){

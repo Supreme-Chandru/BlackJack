@@ -4,7 +4,7 @@ define(['underscore','backbone','model/Card'], function (_, BackBone, Card) {
 		id:"game",
 		tagName : "div",
 		//better to put in one string than use jquery to append.
-		template:'<div id="scoreboard"></div><section id="player"><div id="playerview"></div></section><section id="dealer"><div id="dealerview"></div></section>',
+		template:'<div id="scoreboard"></div><section id = "players" class="group"><section id="player"><div id="playerview"></div></section><section id="dealer"><div id="dealerview"></div></section></section>',
 		
 		initialize: function() {
 			
@@ -54,6 +54,7 @@ define(['underscore','backbone','model/Card'], function (_, BackBone, Card) {
 			this.$message.hide();
 			this.$overlay.hide();
 			
+			this.model.endRound();
 			
 		}
 		

@@ -22,6 +22,7 @@ define(['underscore','backbone','model/ScoreBoard','collection/BlackJackHand','m
 			console.log(this.get("name")+" : ACTION --> HIT");
 			var dealer = this.get("dealer");
 			dealer.draw(this); //player asks dealer to draw the card for him
+			this.view.trigger("scoreChanged","");
 		},
 		
 		stand:function(){

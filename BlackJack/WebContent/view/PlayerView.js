@@ -2,13 +2,14 @@ define(['underscore','backbone','model/Card','view/CardView'], function (_, Back
 	
 	var PlayerView = BackBone.View.extend({
 		el : "#playerview",
-		template:"<div class='hand'></div><div id='playeraction'><button id='hit'>HIT</button><button id='stand'>STAND</button></div>",
+		template:"<div class='score'></div><div class='hand'></div><div id='playeraction'><button id='hit'>HIT</button><button id='stand'>STAND</button></div>",
 		initialize: function() {
 			this.model.view = this;
 		    this.$el.append(this.template);
 		    this.on("cardRemoved",this.removeCard,this);
 		    this.on("cardAdded",this.addCard,this);
-		    
+		    this.on("scoreChanged",this.changeScore,this);
+		    this.$score=this.$el.find(".score");
 		},
 		events : {
 			"click #hit":"onHit",
@@ -38,6 +39,12 @@ define(['underscore','backbone','model/Card','view/CardView'], function (_, Back
 			// Remove card from view
 			card.view.remove();
 			console.log("card removed from UI");
+		},
+		
+		changeScore:function(){
+			var score = this.model.get("hand").getScore();
+			this.$score.html(score.get("value"));
+			
 		},
 		
 		render:function(){
