@@ -1,6 +1,6 @@
 define(['underscore','backbone','model/Card'], function (_, BackBone, Card) {
 	//Not using Template because 
-	var PlayerView = BackBone.View.extend({
+	var GameView = BackBone.View.extend({
 		id:"game",
 		tagName : "div",
 		//better to put in one string than use jquery to append.
@@ -10,37 +10,48 @@ define(['underscore','backbone','model/Card'], function (_, BackBone, Card) {
 			
 			this.$parent=$("#page");
 		    
+			this.$deal=$('<button id="deal" style="display:none;">Deal</div>');
 			this.$overlay=$('<div id="overlay" style="display:none;"></div>');
 			this.$message=$('<div id="message" style="display:none;"></div>');
 			
+			this.$parent.append(this.el);
+		    this.$el.append($(this.template));
+		    this.$el.append(this.$deal);
+		    this.$el.append(this.$overlay);
+		    this.$el.append(this.$message);
+		    
 		    this.render();
 		},
 		
 		render:function(){
-			
+			this.$deal.show();
 		    
-		    this.$parent.append(this.el);
-		    this.$el.append($(this.template));
-		    this.$el.append(this.$overlay);
-		    this.$el.append(this.$message);
 		},
 		
 		events : {
-			"click #start":"startGame",
-			"click #nextround":"continueGame",
+			
 			"click #overlay":"hideNotification",
 			"click #message":"hideNotification",
+			"click #deal":"deal"
 			
 		},
 		
-		startGame:function(){
-			this.model.startRound();
+		deal :function(){
+			
+			this.$deal.hide();
+			//start round
+			this.startRound();
+			//notify playerview that user clicked on deal
+			var playerView = this.model.get("player").view;
+			var dealerView = this.model.get("dealer").view;
+			playerView.trigger("deal","");
+			dealerView.trigger("deal","");
 		},
 		
-		continueGame:function(){
+		startRound:function(){
+			
 			this.model.startRound();
 		},
-		
 		
 		notifyPlayer:function(message){
 			this.$overlay.show();
@@ -56,8 +67,15 @@ define(['underscore','backbone','model/Card'], function (_, BackBone, Card) {
 			
 			this.model.endRound();
 			
+			//notify player view & dealer view that user clicked on deal
+			var playerView = this.model.get("player").view;
+			var dealerView = this.model.get("dealer").view;
+			playerView.trigger("roundEnd","");
+			dealerView.trigger("roundEnd","");
+			
+			this.render();
 		}
 		
 	});
-	return PlayerView;
+	return GameView;
 });

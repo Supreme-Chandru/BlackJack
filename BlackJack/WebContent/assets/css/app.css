@@ -44,7 +44,7 @@ body {
 }
 
 /*http://www.colorzilla.com/gradient-editor/*/
-#hit, #stand {
+#hit, #stand, #deal {
 	cursor: default;
 	width: 90px;
 	height: 90px;

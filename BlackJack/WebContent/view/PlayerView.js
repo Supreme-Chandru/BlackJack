@@ -2,14 +2,20 @@ define(['underscore','backbone','model/Card','view/CardView'], function (_, Back
 	
 	var PlayerView = BackBone.View.extend({
 		el : "#playerview",
-		template:"<div class='score'></div><div class='hand'></div><div id='playeraction'><button id='hit'>HIT</button><button id='stand'>STAND</button></div>",
+		template:"<div class='score'></div><div class='hand'></div><div id='playeraction'><button id='hit'>Hit</button><button id='stand'>Stand</button></div>",
 		initialize: function() {
 			this.model.view = this;
 		    this.$el.append(this.template);
+		    this.on("deal",this.render,this);
+		    this.on("roundEnd",this.onRoundEnd,this);
 		    this.on("cardRemoved",this.removeCard,this);
 		    this.on("cardAdded",this.addCard,this);
 		    this.on("scoreChanged",this.changeScore,this);
 		    this.$score=this.$el.find(".score");
+		    this.$hit = this.$el.find("#hit");
+		    this.$stand = this.$el.find("#stand");
+		    this.$hit.hide();
+		    this.$stand.hide();
 		},
 		events : {
 			"click #hit":"onHit",
@@ -48,6 +54,16 @@ define(['underscore','backbone','model/Card','view/CardView'], function (_, Back
 		},
 		
 		render:function(){
+			this.$hit.show();
+			this.$stand.show();
+			this.$score.show();
+		},
+		
+		onRoundEnd:function(){
+			this.changeScore();
+			this.$score.hide();
+			this.$hit.hide();
+			this.$stand.hide();
 			
 		}
 		

@@ -49,12 +49,9 @@ define(['underscore','backbone','collection/BlackJackDeck','model/CardGame','mod
 			var playerView = new PlayerView({model:player});
 			
 			
-			
-			
-			
-			
 			// If there are multiple players then the all players has to be set
-			this.startRound();
+			
+			//this.startRound();
 		},
 		
 		createDeck:function(){

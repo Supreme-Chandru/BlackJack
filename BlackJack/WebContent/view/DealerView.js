@@ -16,6 +16,12 @@ define(['underscore','backbone','model/Card','view/PlayerView'], function (_, Ba
 		},
 		
 		render:function(){
+			this.$score.show();
+		},
+		
+		onRoundEnd:function(){
+			this.changeScore();
+			this.$score.hide();
 			
 		}
 		
