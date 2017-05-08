@@ -1,11 +1,13 @@
-/* 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
 *
 *  https://designshack.net/articles/css/css-card-tricks/
-*/
+*
+* * * * * * * * * * * * * * * * * * * * * * * * * * */
 .card {
 	position: relative;
 	float: left;
 	margin-right: 10px;
+	margin-bottom: 10px;
 	width: 135px;
 	height: 190px;
 	border-radius: 10px;

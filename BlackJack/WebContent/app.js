@@ -41,12 +41,13 @@ require.config({
 $(document).ready(function(){
 	require(['backbone','app','model/BlackJackCardGame','collection/BlackJackDeck','collection/BlackJackHand','view/CardView'], function (Backbone, AppView, BlackJackCardGame, Deck,BlackJackHand, CardView) {
 		
-		// Initialize the application view
+		//Parameters
 		var gameParameters={
 				"numberOfSets" : 1,
 				"shuffleRecoil" : 6
 		};
 		
+		//Game is initiated
 		var blackJackCardGame = new BlackJackCardGame(gameParameters);
 		
 	});

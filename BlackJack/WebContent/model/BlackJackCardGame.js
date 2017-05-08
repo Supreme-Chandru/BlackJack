@@ -49,9 +49,8 @@ define(['underscore','backbone','collection/BlackJackDeck','model/CardGame','mod
 			var playerView = new PlayerView({model:player});
 			
 			
-			// If there are multiple players then the all players has to be set
 			
-			//this.startRound();
+			
 		},
 		
 		createDeck:function(){
@@ -76,7 +75,7 @@ define(['underscore','backbone','collection/BlackJackDeck','model/CardGame','mod
 			
 			dealer.hit();    //only one card to dealer will be given (other not visible, so not using draw)
 			
-			dealer.isBlackJack(player);
+			dealer.isBlackJack(player); // will declare blackJack if true, else returns and continues the game
 		},
 		
 		endRound:function(){

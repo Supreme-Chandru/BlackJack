@@ -25,8 +25,11 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 			var game = this.get("game");
 			var deck = game.get("deck");
 			var playerHand = player.get("hand");
+			
+			//draw the card from deck
 			var card = deck.shift();
 			
+			//give card to player hand
 			playerHand.push(card);
 			
 			this.validateHand(player);  //evaluate score and check
@@ -36,11 +39,16 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 			var scoreValue = player.get("hand").getScore().get("value");
 			
 			if(scoreValue==21 &&  player.get("hand").length == 2){
-				this.play();
+				
+				this.play();  // dealer will play
+				
 				var dealerScoreValue = this.get("hand").getScore().get("value");
+				
+				// If dealer also is blackjack
 				if(dealerScoreValue==21 &&  this.get("hand").length == 2){
 					player.tie();
 				}else{
+					//player is blackjack
 					player.blackJack();
 				}
 				
@@ -50,11 +58,8 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 		validateHand:function(player){
 			var scoreValue = player.get("hand").getScore().get("value");
 			
-			
-			
 			if(scoreValue>21){
 				player.bust();
-				//this.get("game").endRound();
 			}
 			
 		},
@@ -65,7 +70,6 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 			//Player lose scenario
 			if(playerScoreValue>21){
 				player.bust();
-				//this.get("game").endRound();
 			}
 			else
 			{
@@ -109,12 +113,14 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 			var deck = game.get("deck");
 			var dealerHand = this.get("hand");
 			
+			//put the cards back to Deck 
 			this.addCardBacktoDeck(deck, playerHand);
 			this.addCardBacktoDeck(deck, dealerHand);
 			
 		},
 		
 		addCardBacktoDeck:function(deck, hand){
+			//get all cards from hand and add it to deck
 			while(hand.length!=0) {
 				var card = hand.shift();
 				deck.push(card); 
