@@ -24,7 +24,7 @@ define(['underscore','backbone','model/ScoreBoard'], function (_, BackBone, Scor
 				this.$winRate.html(0);
 			}else{
 				var winRate = (scoreBoard.get("totalWon")/scoreBoard.get("totalPlayed"))*100;
-				this.$winRate.html(winRate);
+				this.$winRate.html(parseFloat(winRate).toPrecision(4));
 			}
 			
 			

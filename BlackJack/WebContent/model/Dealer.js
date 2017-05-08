@@ -32,8 +32,25 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 			this.validateHand(player);  //evaluate score and check
 		},
 		
+		isBlackJack:function(player){
+			var scoreValue = player.get("hand").getScore().get("value");
+			
+			if(scoreValue==21 &&  player.get("hand").length == 2){
+				this.play();
+				var dealerScoreValue = this.get("hand").getScore().get("value");
+				if(dealerScoreValue==21 &&  this.get("hand").length == 2){
+					player.tie();
+				}else{
+					player.blackJack();
+				}
+				
+			}
+		},
+		
 		validateHand:function(player){
 			var scoreValue = player.get("hand").getScore().get("value");
+			
+			
 			
 			if(scoreValue>21){
 				player.bust();
@@ -58,6 +75,7 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 				
 				//Dealer already would have player as won and ended the round 
 				if(dealerScoreValue>21){
+					player.won();
 					return ;
 				}
 				//log the scores of both dealer and player
@@ -104,7 +122,11 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 		},
 		
 		bust:function(){
-			this.get("game").get("player").won();
+			
+		},
+		
+		blackJack:function(){
+			//dealer cannot be blackjack
 		}
 	
 	});

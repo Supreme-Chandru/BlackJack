@@ -30,11 +30,23 @@ define(['underscore','backbone','model/ScoreBoard','collection/BlackJackHand','m
 			var dealer = this.get("dealer");
 			dealer.endPlayerRound(this);
 		},
+		
 		bust:function(){
 			this.gameView.notifyPlayer("Busted");
 			console.log(this.get("name")+" : STATUS --> BUSTED");
 			// dealer has busted him
 			var scoreBoard = this.get("scoreBoard");
+			scoreBoard.incrementTotalPlayed();
+			
+		},
+		
+		blackJack:function(){
+			
+			this.gameView.notifyPlayer("BlackJack");
+			console.log(this.get("name")+" : STATUS --> BLACKJACK");
+			
+			var scoreBoard = this.get("scoreBoard");
+			scoreBoard.incrementTotalWon();
 			scoreBoard.incrementTotalPlayed();
 			
 		},

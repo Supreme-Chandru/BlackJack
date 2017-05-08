@@ -83,20 +83,20 @@ body {
 
 #players {
     /* margin: 0 auto; */
-    width: 80%;
-    margin-top: 200px;
-    padding-left: 10%;
-    padding-right: 10%;
+    width: 90%;
+    margin-top: 180px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 section#player {
-    width: 50%;
+    width: 70%;
     float: left;
 }
 
 #dealer {
     float: right;
-    width: 50%;
+    width: 30%;
 }
 
 #playeraction {
@@ -113,4 +113,12 @@ div#game {
 	 font-size: 70px;
     
     text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+}
+
+.hand {
+    min-height: 250px;
+}
+
+#deal {
+	margin-left: 300px;
 }

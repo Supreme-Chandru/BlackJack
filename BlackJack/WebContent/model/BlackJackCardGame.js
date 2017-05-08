@@ -76,6 +76,7 @@ define(['underscore','backbone','collection/BlackJackDeck','model/CardGame','mod
 			
 			dealer.hit();    //only one card to dealer will be given (other not visible, so not using draw)
 			
+			dealer.isBlackJack(player);
 		},
 		
 		endRound:function(){
