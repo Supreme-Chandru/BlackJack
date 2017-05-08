@@ -12,11 +12,14 @@ define(['underscore','backbone'], function (_, BackBone) {
 			// incrementing score by 1 
 			var newTotalWon = this.get("totalWon")+1;
 			this.set("totalWon",newTotalWon);
+			this.view.trigger("changed",{},this);
+			
 		},
 		
 		incrementTotalPlayed : function(){
 			var newTotalPlayed = this.get("totalPlayed")+1;
 			this.set("totalPlayed",newTotalPlayed);
+			this.view.trigger("changed",{},this);
 		}
 	
 		 

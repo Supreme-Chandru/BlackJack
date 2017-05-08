@@ -5,7 +5,7 @@ define(['underscore','backbone','model/ScoreBoard','collection/BlackJackHand','m
 		
 		initialize:function(){
 			
-			this.set("scoreBoard",new ScoreBoard());
+			this.set("scoreBoard",this.get("game").get("scoreBoard"));
 			var blackJackHand = new BlackJackHand(null,{"parent":this});
 			
 			this.set("hand",blackJackHand);

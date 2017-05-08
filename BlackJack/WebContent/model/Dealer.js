@@ -56,6 +56,10 @@ define(['underscore','backbone','model/Player','collection/BlackJackHand'], func
 				this.play();
 				var dealerScoreValue = this.get("hand").getScore().get("value");
 				
+				//Dealer already would have player as won and ended the round 
+				if(dealerScoreValue>21){
+					return ;
+				}
 				//log the scores of both dealer and player
 				console.log(this.get("name")+" : SCORE --> "+ dealerScoreValue);
 				console.log(player.get("name")+" : SCORE --> "+ playerScoreValue);

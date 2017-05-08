@@ -62,3 +62,12 @@ body {
                                   supported by Chrome and Opera */
     
 }
+
+#scoreboard {
+    background-color: rgba(119, 51, 46, 0.59);
+    color: white;
+    font-size: x-large;
+    padding: 20px 40px;
+    border: 16px solid rgba(189, 85, 6, 0.54);
+    float: right;
+}

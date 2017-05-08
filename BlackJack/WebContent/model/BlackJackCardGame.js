@@ -1,5 +1,6 @@
-define(['underscore','backbone','collection/BlackJackDeck','model/CardGame','model/Player','model/Dealer','view/PlayerView','view/DealerView','view/GameView'], 
-		function (_, BackBone,BlackJackDeck, CardGame, Player, Dealer, PlayerView, DealerView, GameView) {
+define(['underscore','backbone','collection/BlackJackDeck','model/CardGame','model/Player','model/Dealer','view/PlayerView',
+        'view/DealerView','view/GameView','model/ScoreBoard', 'view/ScoreBoardView'], 
+		function (_, BackBone,BlackJackDeck, CardGame, Player, Dealer, PlayerView, DealerView, GameView, ScoreBoard, ScoreBoardView) {
 
 	var BlackJackCardGame = CardGame.extend({
 		defaults:{
@@ -17,6 +18,10 @@ define(['underscore','backbone','collection/BlackJackDeck','model/CardGame','mod
 			
 			var game = this;
 			
+			//Create ScoreBoard, ScoreBoardView and bind
+			var scoreBoard = new ScoreBoard();
+			var scoreBoardView = new ScoreBoardView({model: scoreBoard});
+			this.set("scoreBoard",scoreBoard);
 			
 			//Initialize Dealer, Player
 			var dealer = new Dealer({name:"DEALER", game:game});
@@ -42,6 +47,10 @@ define(['underscore','backbone','collection/BlackJackDeck','model/CardGame','mod
 			//Create View for Dealer and Player
 			var dealerView = new DealerView({model:dealer});
 			var playerView = new PlayerView({model:player});
+			
+			
+			
+			
 			
 			
 			// If there are multiple players then the all players has to be set
