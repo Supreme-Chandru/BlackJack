@@ -2,6 +2,7 @@
 This is a Static Project, it does not need any external building. Open the index.html in WebContent Folder.
 
 # Requirements
+- Single Player.
 - Dealer must hit on soft 17
 - Single Deck. The deck is shuffled every 6 rounds.
 - Player is not allowed to split cards.
